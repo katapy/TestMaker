@@ -29,12 +29,8 @@ spec:
       containers:
       - name: postgres
         image: postgres
-        env:
-        - name: POSTGRES_PASSWORD
-          value: "P@ssw0rd"
-        - name: POSTGRES_DB
-          value: "mydb"
-        - name: POSTGRES_USER
-          value: "admin"
+        envFrom:
+        - secretRef:
+            name: my-env-file-secret
         ports:
-        - containerPort: 5432
+          - containerPort: 5432
