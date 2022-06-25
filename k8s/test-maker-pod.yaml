@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-maker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-maker
+  template:
+    metadata:
+      labels:
+        app: test-maker
+    spec:
+      containers:
+      - name: postgres
+        image: postgres
+        envFrom:
+        - secretRef:
+            name: my-env-file-secret
+        ports:
+          - containerPort: 5432
+      - name: test-maker
+        image: test-maker:v1
+        ports:
+        - containerPort: 5000

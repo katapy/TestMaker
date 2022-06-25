@@ -5,12 +5,21 @@ eval $(minikube docker-env)
 docker build -t $APP_NAME:v1 .
 
 (
+    kubectl create namespace $APP_NAME
+
+    # Create secret
+    kubectl create secret generic my-env-file-secret --from-env-file=./.env --namespace=$APP_NAME
+    kubectl describe secrets/my-env-file-secret --namespace=$APP_NAME
+)
+
+(
     cd k8s
     minikube start
 
     # Run k8s app
-    kubectl create namespace $APP_NAME
-    kubectl apply -f deployment.yaml --namespace=$APP_NAME
+    kubectl apply -f test-maker-pod.yaml --namespace=$APP_NAME
+    # kubectl apply -f test-maker-psql-service.yaml --namespace=$APP_NAME
+    kubectl apply -f test-maker-service.yaml --namespace=$APP_NAME
     kubectl expose deployment $APP_NAME --type=NodePort --port=5000 --namespace=$APP_NAME
     
     # Open brower
