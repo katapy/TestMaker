@@ -26,7 +26,7 @@ docker build -t $APP_NAME:v1 .
     echo "Please wait 20 seconds"
     sleep 20
     URL=`minikube service $APP_NAME --url --namespace=$APP_NAME`
-    open $URL
+    open $URL/testmaker
 
     # Wait for input
     read -p "Input if you want to end."
