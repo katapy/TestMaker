@@ -19,14 +19,18 @@
             </tr>
         </thead>
         <tbody>
+            {% for item in items %} 
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                </tr>
+            {% endfor %}
             <tr>
-                <td> 
-                    message
-                </td>
+                <td></td>
                 <td>
-                    message2
+                    <input type="text" name="intput">
                 </td>
-            </tr> 
+            </tr>
         </tbody>
     </table>
     <script>
