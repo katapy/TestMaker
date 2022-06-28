@@ -1,6 +1,7 @@
 """person model
 """
 
+import string
 from main import database
 
 class person(database.db.Model):
@@ -9,12 +10,5 @@ class person(database.db.Model):
 	
 	def __init__(self, name):
 		self.name = name
-
-	def add_test_person():
-		p = person(name="test")
-		database.db.session.add(p)
-		database.db.session.commit()
-		test: list[person] = person.query.order_by(person.name).all()
-		return test
-
+		
 database.db.create_all()

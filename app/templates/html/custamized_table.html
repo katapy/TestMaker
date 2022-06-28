@@ -7,36 +7,57 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        
+    <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
   </head>
 <body>
     <button class="btn btn-primary" onclick="addButtonClick()"> + </button>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th> H1 </th>
-                <th> H2 </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in items %} 
-                <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.name }}</td>
-                </tr>
-            {% endfor %}
-            <tr>
-                <td></td>
-                <td>
-                    <input type="text" name="intput">
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div>
+    </div>
     <script>
         function addButtonClick(){
             alert('Click');
         }
+    </script>
+    <script>
+        
+        function onChangeNewInput(){
+            let element = document.getElementById('newInput');
+            data = {"new_input": element.value};
+            json = JSON.stringify(data);  // Convert to json.
+            $.ajax({
+                type: "POST",
+                url: "/testmaker/table",
+                data: json,
+                contentType: "application/json",
+                success: function(msg) {
+                    $('div').html(msg);
+                    console.log(msg);
+                },
+                error: function(msg) {
+                    console.log("error");
+                }
+            });
+        }
+        let create_table = function() {
+            data = {"test": "test"};
+            json = JSON.stringify(data);  // Convert to json.
+            $.ajax({
+                type: "POST",
+                url: "/testmaker/table",
+                data: json,
+                contentType: "application/json",
+                success: function(msg) {
+                    $('div').html(msg);
+                    console.log(msg);
+                },
+                error: function(msg) {
+                    console.log("error");
+                }
+            });
+        }
+        $(document).ready(function() {
+            create_table();
+        });
     </script>
 </body>
 </html>
