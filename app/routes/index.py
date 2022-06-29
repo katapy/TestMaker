@@ -3,5 +3,5 @@ import routes
 
 @routes.bp.route("/")
 def hello():
-    return render_template('html/index.html')
+    return render_template('index.html')
     

@@ -15,6 +15,6 @@ def table():
             input_data: string = data['new_input']
             add_person(input_data)
         persons: list[person] = get_all_person()
-        return render_template('html/table.html', items=persons)
+        return render_template('table.html', items=persons)
     else:
-        return render_template('html/custamized_table.html')
+        return render_template('custamized_table.html')
