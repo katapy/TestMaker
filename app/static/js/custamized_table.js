@@ -1,4 +1,7 @@
 
+/**
+ * OnClick btn.
+*/
 $('#btn').click(function(){
     alert('Click');
 });
@@ -7,6 +10,9 @@ $(document).ready(function() {
     create_table('{}');
 });
 
+/** 
+ * On change new input.
+*/
 function onChangeNewInput(){
     let element = document.getElementById('newInput');
     data = {"new_input": element.value};
@@ -26,6 +32,10 @@ function onChangeNewInput(){
     });
 }
 
+/**
+ * Create table by data.
+ * @param {string} data Json data which written in table. 
+ */
 let create_table = function(data) {
     $("#custamized-table-body").empty();
     console.log("data: " + data);
