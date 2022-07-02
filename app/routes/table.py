@@ -5,7 +5,8 @@ import string
 from flask import render_template, request
 import routes
 from database.model.person import person
-from database.event.person_event import add_person, get_all_person
+from database.event.person_event import add_person, get_all_person, convert_json
+from main import logger
 
 @routes.bp.route("/table", methods=['GET', 'POST'])
 def table():
@@ -15,6 +16,8 @@ def table():
             input_data: string = data['new_input']
             add_person(input_data)
         persons: list[person] = get_all_person()
-        return render_template('table.html', items=persons)
+        persons_json = convert_json(persons=persons)
+        logger(persons_json)
+        return persons_json
     else:
         return render_template('custamized_table.html')

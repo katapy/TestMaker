@@ -12,7 +12,4 @@ RUN \
     python3 -m pip install -r app/requirements.txt --no-cache-dir && \
     apk --purge del .build-deps
 
-# test run
-# RUN pytest -q app/test
-
 CMD ["python", "app/main.py"]

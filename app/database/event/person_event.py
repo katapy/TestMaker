@@ -1,9 +1,10 @@
 """person table event
 """
 
+import json
 import string
 from database.model.person import person
-from main import database
+from main import database, logger
 
 def add_test_person():
 	p = person(name="test")
@@ -21,3 +22,10 @@ def add_person(name: string):
 
 def get_all_person():
 	return person.query.order_by(person.name).all()
+
+def convert_json(persons: list[person]):
+	persons_json = []
+	for p in persons:
+		person_json = dict(id=p.id, name=p.name)
+		persons_json.append(person_json)
+	return json.dumps(persons_json)
