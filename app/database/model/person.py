@@ -11,4 +11,3 @@ class person(database.db.Model):
 	def __init__(self, name):
 		self.name = name
 		
-database.db.create_all()

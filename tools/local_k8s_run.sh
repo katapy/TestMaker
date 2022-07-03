@@ -21,10 +21,21 @@ docker build -t $APP_NAME:v1 .
     # kubectl apply -f test-maker-psql-service.yaml --namespace=$APP_NAME
     kubectl apply -f test-maker-service.yaml --namespace=$APP_NAME
     kubectl expose deployment $APP_NAME --type=NodePort --port=5000 --namespace=$APP_NAME
+)
+(
+    cd tools
     
+    # Wait for running k8s.
+    echo "Please wait for 15 seconds"
+    sleep 15
+
+    # Initialize RDB
+    echo "Initailize RDB"
+    # Allow permission
+    chmod +x create_table.sh
+    ./create_table.sh
+
     # Open brower
-    echo "Please wait 20 seconds"
-    sleep 20
     URL=`minikube service $APP_NAME --url --namespace=$APP_NAME`
     open $URL/testmaker
 
