@@ -12,19 +12,24 @@ PSQL_URI="postgresql://localhost/$POSTGRES_DB?user=$POSTGRES_USER"
 echo "Connect RDB"
 psql $PSQL_URI
 
-create table table_header (
-    table_name varchar(100),
-    column_name varchar(100),
-    display_name varchar(100),
-    PRIMARY KEY (table_name, column_name)
-);
+insert into table_header(
+    table_name,
+    column_name,
+    display_name)
+    values(
+        'person',
+        'id',
+        'ID');
 
-create table person (
-    id SERIAL NOT NULL, 
-    name varchar(100),
-    PRIMARY KEY (id)
-);
+insert into table_header(
+    table_name,
+    column_name,
+    display_name)
+    values(
+        'person',
+        'name',
+        'User name');
 
-\dt
+SELECT * FROM table_header;
 
 EOC

@@ -5,7 +5,7 @@ import string
 from flask import render_template, request
 import routes
 from database.model.person import person
-from database.event.person_event import add_person, get_all_person, convert_json
+from database.event.person_event import add_person, get_all_person, convert_json, get_headers
 from main import logger
 
 @routes.bp.route("/table", methods=['GET', 'POST'])

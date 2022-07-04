@@ -6,8 +6,11 @@ $('#btn').click(function(){
     alert('Click');
 });
 
+/**
+ * Run on ready.
+ */
 $(document).ready(function() {
-    create_table('{}');
+    create_data_table('{}');
 });
 
 /** 
@@ -17,6 +20,14 @@ function onChangeNewInput(){
     let element = document.getElementById('newInput');
     data = {"new_input": element.value};
     json = JSON.stringify(data);  // Convert to json.
+    create_data_table(json);
+}
+
+/**
+ * Create table by data.
+ * @param {string} json input data.
+ */
+function create_data_table(json) {
     $.ajax({
         type: "POST",
         url: "/testmaker/table",
@@ -38,19 +49,31 @@ function onChangeNewInput(){
  */
 let create_table = function(data) {
     $("#custamized-table-body").empty();
+    $("#custamized-table-header").empty();
     console.log("data: " + data);
     var usage_arr = JSON.parse(data);
-    $.each(usage_arr,function(i,rowdata){
-        var id = rowdata.id;
-        var name = rowdata.name;
+    var header_arr = usage_arr['header'];
+    var data_arr = usage_arr['data'];
+
+    // Set header.
+    var header_tr = $('<tr />');
+    for(var key in header_arr) {
+        var th = $('<th />').text(header_arr[key]);
+        header_tr.append(th);
+    }
+    $('#custamized-table-header').append(header_tr);
+
+    // Set data.
+    $.each(data_arr,function(i,rowdata){
         var tr = $('<tr />');
-        var id_cell = $('<td />').text(id);
-        var name_cell = $('<td />').text(name);
-        tr.append(id_cell);
-        tr.append(name_cell);
+        for(var key in header_arr) {
+            var th = $('<td />').text(rowdata[key]);
+            tr.append(th);
+        }
         $('#custamized-table-body').append(tr);   
     });
 
+    // Set input field
     var tr = $('<tr />');
     var id = $('<td />').text('');
     var name = $('<td />');

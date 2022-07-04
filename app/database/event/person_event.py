@@ -4,6 +4,7 @@
 import json
 import string
 from database.model.person import person
+from database.event.table_header_event import get_disply_name
 from main import database, logger
 
 def add_test_person():
@@ -28,4 +29,8 @@ def convert_json(persons: list[person]):
 	for p in persons:
 		person_json = dict(id=p.id, name=p.name)
 		persons_json.append(person_json)
-	return json.dumps(persons_json)
+	return json.dumps(dict(header=get_headers(), data=persons_json))
+
+def get_headers():
+	return dict(id=get_disply_name('person', 'id'),\
+		 name=get_disply_name('person', 'name'))

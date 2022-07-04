@@ -24,7 +24,7 @@ docker build -t $APP_NAME:v1 .
 )
 (
     cd tools
-    
+
     # Wait for running k8s.
     echo "Please wait for 15 seconds"
     sleep 15
@@ -33,7 +33,9 @@ docker build -t $APP_NAME:v1 .
     echo "Initailize RDB"
     # Allow permission
     chmod +x create_table.sh
+    chmod +x insert_master_table.sh
     ./create_table.sh
+    ./insert_master_table.sh
 
     # Open brower
     URL=`minikube service $APP_NAME --url --namespace=$APP_NAME`
