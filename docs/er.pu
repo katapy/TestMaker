@@ -1,0 +1,28 @@
+
+@startuml er
+
+!include entity.pu
+
+app_user ||.r.|{ user
+app_user ||.l.|{ app
+
+app ||.u.|{ app_test_summary_relation
+app ||...|{app_usecase_perspective_relation
+
+app_usecase_perspective_relation ||...|{ usecase
+app_usecase_perspective_relation ||..|{ perspective
+usecase -[hidden]u- perspective
+
+app_test_summary_relation ||.d.|{ test_summary
+test_summary ||.d.{ test_flow
+test_flow ||.d.|{ testcase
+test_perspective ||.r.|{ test_flow
+test_flow ||.d.|{ test_status
+
+test_perspective ||.l.|{ perspective
+usecase ||.r.|{ testcase
+
+change_log ||..|{test_flow
+test_summary ||.r.|{ change_log
+
+@enduml

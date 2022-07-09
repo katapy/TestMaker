@@ -1,0 +1,30 @@
+
+@startuml workflow
+
+start
+
+:Deside tested app;
+
+:List perspectives;
+
+:Create test cases \n from a perspective;
+note right
+Two-factor coverage
+end note
+
+:Change the viewpoint \n to setting / operation;
+note right
+Equivalence partition
+end note
+
+:Create expected value;
+
+:Run the test;
+
+:Output test results;
+
+:Show NG test perspective;
+
+end
+
+@enduml
