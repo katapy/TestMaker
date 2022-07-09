@@ -1,0 +1,117 @@
+
+@startuml entity
+
+!define MASTER CAE7F2
+
+entity table_header <<M, CAE7F2>> {
+    + table_name char(100)
+    + column_name char(100)
+    --
+    * display_name char(100)
+}
+
+entity user {
+    * user_id serial
+    --
+    * user_name char(100)
+    * mail_adress char(100)
+    * password char(100)
+}
+
+package app_package {
+    entity app {
+        + app_id serial
+        --
+        * app_name char(100)
+    }
+
+    package test_summary_package {
+        entity app_test_summary_relation  {
+            + app_test_summary_relation_id serial
+            --
+            # app_id integer
+            # test_summary_id integer
+        }
+
+        entity test_summary {
+            + test_summary_id serial
+            --
+            # change_log_id integer
+            --
+            * test_summary_name char(100)
+        }
+
+        entity test_flow {
+            + test_flow_id serial
+            --
+            # test_summary_id integer
+            # change_log_id integer
+            # test_status_id integer
+            --
+            * test_name char(100)
+        }
+        entity test_perspective {
+            + test_perspective_id serial
+            --
+            # perspective_id integer
+            --
+            * test_id integer
+        }
+        entity testcase {
+            + testcase_id serial
+            --
+            # test_flow_id integer
+            # usecase_id integer
+            --
+            * test_number integer
+        }
+        entity test_status <<M, CAE7F2>> {
+            + test_status_id integer
+            --
+            * test_status char(100)
+        }
+    }
+
+    package app_infomation_package {
+        entity app_usecase_perspective_relation {
+            + app_usecase_perspective_relation_id serial
+            --
+            # app_id integer
+            # usecase_id integer
+            # perspective_id integer
+        }
+
+        entity perspective {
+            + perspective_id serial
+            --
+            * perspective_name char(100)
+            * perspective_detail text
+            * is_setting boolean
+        }
+
+        entity usecase {
+            + usecase_id serial
+            --
+            * usecase_name char(100)
+            * usecase_detail text
+        }
+    }
+    entity app_user {
+        + user_test_relation_id serial
+        --
+        # user_id integer
+        # test_id integer
+    }
+}
+
+entity change_log {
+    + change_log_id serial
+    --
+    # created_user_id integer
+    # updated_user_id integer
+    --
+    * created_date timestamp
+    * updated_date timestamp
+}
+
+@enduml

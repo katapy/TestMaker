@@ -1,0 +1,54 @@
+  
+@startuml Screen transition diagram
+
+state Login {
+
+}
+
+state AppList {
+    state App {
+
+    }
+}
+
+state PrespectiveList {
+    state Presprective {
+        
+    }
+}
+
+state UsecaseList {
+    state Usecase {
+
+    }
+}
+
+state TestSummaryList {
+    state TestSummary {
+
+    }
+}
+
+state Test {
+    state TestCase {
+
+    }    
+}
+
+state TestPrespectiveList {
+    state TestPrespective {
+        
+    }
+}
+
+Login --> AppList: User Login
+
+App --> PrespectiveList: Check App\nFunction
+App --> TestSummaryList: Test
+
+TestSummary --> TestPrespectiveList: Create Test
+TestSummary --> Test: Excute Test
+
+Presprective --> UsecaseList: Detail
+
+@enduml
