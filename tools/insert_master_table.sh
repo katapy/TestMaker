@@ -32,14 +32,4 @@ insert into table_header(
 
 SELECT * FROM table_header;
 
--- test_user
-insert into app_user(
-    name,
-    mail,
-    password)
-    values(
-        'admin',
-        'test@gmail.com',
-        'admin');
-
 EOC

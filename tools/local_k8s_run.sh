@@ -42,6 +42,13 @@ minikube start
     ./create_table.sh
     ./insert_master_table.sh
 
+    # Set env data if exist
+    if [ -e "env/insert_env_data.sh" ]; then
+        echo "File exists."
+        chmod +x env/insert_env_data.sh
+        ./env/insert_env_data.sh
+    fi
+
     # Open brower
     URL=`minikube service $APP_NAME --url --namespace=$APP_NAME`
     open $URL/testmaker/login
