@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from os.path import dirname, abspath
 parent_dir = dirname(dirname(abspath(__file__)))
 if parent_dir not in sys.path:
@@ -10,3 +10,4 @@ def set_app_config(app):
     uri: string = f"postgresql://localhost/{POSTGRES_DB}?user={POSTGRES_USER}"
     app.config['SQLALCHEMY_DATABASE_URI'] = uri
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = os.urandom(24)
