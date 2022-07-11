@@ -1,8 +1,14 @@
+### WARING
+### If you cannot start pod, please check below.
+### https://qiita.com/hakatakinoco/items/6fbcfbc833aaecee3bea
+
 APP_NAME=test-maker
 
 cd ..
 eval $(minikube docker-env)
 docker build -t $APP_NAME:v1 .
+
+minikube start
 
 (
     kubectl create namespace $APP_NAME
@@ -14,7 +20,6 @@ docker build -t $APP_NAME:v1 .
 
 (
     cd k8s
-    minikube start
 
     # Run k8s app
     kubectl apply -f test-maker-pod.yaml --namespace=$APP_NAME
@@ -37,9 +42,16 @@ docker build -t $APP_NAME:v1 .
     ./create_table.sh
     ./insert_master_table.sh
 
+    # Set env data if exist
+    if [ -e "env/insert_env_data.sh" ]; then
+        echo "File exists."
+        chmod +x env/insert_env_data.sh
+        ./env/insert_env_data.sh
+    fi
+
     # Open brower
     URL=`minikube service $APP_NAME --url --namespace=$APP_NAME`
-    open $URL/testmaker
+    open $URL/testmaker/login
 
     # Wait for input
     read -p "Input if you want to end."

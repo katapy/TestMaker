@@ -25,6 +25,14 @@ create table person (
     PRIMARY KEY (id)
 );
 
+create table app_user (
+    id SERIAL NOT NULL, 
+    name varchar(100),
+    password varchar(100),
+    mail varchar(100),
+    PRIMARY KEY (id)
+);
+
 \dt
 
 EOC
