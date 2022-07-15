@@ -2,8 +2,7 @@ FROM python:alpine
 
 WORKDIR /app
 
-COPY ./app/ ./app/
-COPY ./.env ./app/
+ADD ./app/requirements.txt ./app/
 
 RUN pip install --upgrade pip
 RUN \
@@ -11,5 +10,8 @@ RUN \
     apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
     python3 -m pip install -r app/requirements.txt --no-cache-dir && \
     apk --purge del .build-deps
+
+COPY ./app/ ./app/
+COPY ./.env ./app/
 
 CMD ["python", "app/main.py"]

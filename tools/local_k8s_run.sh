@@ -6,7 +6,12 @@ APP_NAME=test-maker
 
 cd ..
 eval $(minikube docker-env)
-docker build -t $APP_NAME:v1 .
+(
+    start_time=`date +%s`
+    docker build -t $APP_NAME:v1 .
+    end_time=`date +%s`
+    echo "Docker build time: $((end_time - start_time))"
+)
 
 minikube start
 
