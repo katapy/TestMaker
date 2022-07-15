@@ -5,7 +5,7 @@ import string
 from flask import render_template, request
 import routes
 from database.model.person import person
-from database.event.person_event import add_person, get_all_person, convert_json, get_headers
+from database.event.person_event import add_person, get_all_person, convert_json, update_person
 from main import logger
 
 @routes.bp.route("/table", methods=['GET', 'POST'])
@@ -15,6 +15,7 @@ def table():
         for key in data:
             if str.isdecimal(key.strip()):
                 logger(f"value: {data[key]}")
+                update_person(int(key.strip()), data[key])
 
         if 'new_input' in data:
             input_data: string = data['new_input']

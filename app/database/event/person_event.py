@@ -3,16 +3,15 @@
 
 import json
 import string
+from sqlalchemy import text
 from database.model.person import person
 from database.event.table_header_event import get_disply_name
 from main import database, logger
 
-def add_test_person():
-	p = person(name="test")
-	database.db.session.add(p)
-	database.databasedb.session.commit()
-	test: list[person.person] = person.query.order_by(person.name).all()
-	return test
+def update_person(id: int, name: string):
+	p: person = person.query.filter(text(f"id={id}")).first()
+	p.name = name
+	database.db.session.commit()
 
 def add_person(name: string):
 	p = person(name=name)
