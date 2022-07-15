@@ -12,12 +12,15 @@ from main import logger
 def table():
     if request.method == 'POST':
         data = request.json
+        for key in data:
+            if str.isdecimal(key.strip()):
+                logger(f"value: {data[key]}")
+
         if 'new_input' in data:
             input_data: string = data['new_input']
             add_person(input_data)
         persons: list[person] = get_all_person()
         persons_json = convert_json(persons=persons)
-        logger(persons_json)
         return persons_json
     else:
         return render_template('custamized_table.html')
