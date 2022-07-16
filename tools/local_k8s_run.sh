@@ -5,15 +5,25 @@
 APP_NAME=test-maker
 
 cd ..
+
+# Start minikube if it is not running.
+(
+    MINIKUBE_STATUS=`minikube status | grep host | awk '{print $2}'`
+    echo "minikube host is $MINIKUBE_STATUS"
+    if [ $MINIKUBE_STATUS != "Running" ]; then
+        minikube start
+    fi
+)
+
 eval $(minikube docker-env)
+
+# Build docker.
 (
     start_time=`date +%s`
     docker build -t $APP_NAME:v1 .
     end_time=`date +%s`
     echo "Docker build time: $((end_time - start_time))"
 )
-
-minikube start
 
 (
     kubectl create namespace $APP_NAME
