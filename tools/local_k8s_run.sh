@@ -45,15 +45,17 @@ eval $(minikube docker-env)
 (
     cd tools
 
-    # Wait for running k8s.
-    echo "Please wait for 15 seconds"
-    sleep 15
+    # Allow permission
+    chmod +x wait_db_connection.sh
+    chmod +x create_table.sh
+    chmod +x insert_master_table.sh
+
+    # Waiting for connecting DB.
+    ./wait_db_connection.sh
 
     # Initialize RDB
     echo "Initailize RDB"
     # Allow permission
-    chmod +x create_table.sh
-    chmod +x insert_master_table.sh
     ./create_table.sh
     ./insert_master_table.sh
 
