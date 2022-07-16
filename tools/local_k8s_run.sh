@@ -5,10 +5,25 @@
 APP_NAME=test-maker
 
 cd ..
-eval $(minikube docker-env)
-docker build -t $APP_NAME:v1 .
 
-minikube start
+# Start minikube if it is not running.
+(
+    MINIKUBE_STATUS=`minikube status | grep host | awk '{print $2}'`
+    echo "minikube host is $MINIKUBE_STATUS"
+    if [ $MINIKUBE_STATUS != "Running" ]; then
+        minikube start
+    fi
+)
+
+eval $(minikube docker-env)
+
+# Build docker.
+(
+    start_time=`date +%s`
+    docker build -t $APP_NAME:v1 .
+    end_time=`date +%s`
+    echo "Docker build time: $((end_time - start_time))"
+)
 
 (
     kubectl create namespace $APP_NAME
@@ -30,15 +45,17 @@ minikube start
 (
     cd tools
 
-    # Wait for running k8s.
-    echo "Please wait for 15 seconds"
-    sleep 15
+    # Allow permission
+    chmod +x wait_db_connection.sh
+    chmod +x create_table.sh
+    chmod +x insert_master_table.sh
+
+    # Waiting for connecting DB.
+    ./wait_db_connection.sh
 
     # Initialize RDB
     echo "Initailize RDB"
     # Allow permission
-    chmod +x create_table.sh
-    chmod +x insert_master_table.sh
     ./create_table.sh
     ./insert_master_table.sh
 

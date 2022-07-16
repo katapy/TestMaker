@@ -3,8 +3,8 @@
 
 !include entity.pu
 
-app_user ||.r.|{ user
-app_user ||.l.|{ app
+app_user_relation ||.r.|{ user
+app_user_relation ||.l.|{ app
 
 app ||.u.|{ app_test_summary_relation
 app ||...|{app_usecase_perspective_relation

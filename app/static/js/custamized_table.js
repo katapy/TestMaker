@@ -23,6 +23,18 @@ function onChangeNewInput(){
     create_data_table(json);
 }
 
+/** 
+ * On change input id.
+*/
+function onChangeInput(id){
+    let element = document.getElementById('input_' + id);
+    // console.log(id);
+    // key = id.toString(10);
+    data = { [id] : element.value};
+    json = JSON.stringify(data);  // Convert to json.
+    create_data_table(json);
+}
+
 /**
  * Create table by data.
  * @param {string} json input data.
@@ -30,7 +42,7 @@ function onChangeNewInput(){
 function create_data_table(json) {
     $.ajax({
         type: "POST",
-        url: "/testmaker/table",
+        url: location.pathname,
         data: json,
         contentType: "application/json",
         success: function(data) {
@@ -38,7 +50,7 @@ function create_data_table(json) {
             create_table(data);
         },
         error: function(msg) {
-            console.log("error");
+            console.log(msg);
         }
     });
 }
@@ -67,8 +79,7 @@ let create_table = function(data) {
     $.each(data_arr,function(i,rowdata){
         var tr = $('<tr />');
         for(var key in header_arr) {
-            var th = $('<td />').text(rowdata[key]);
-            tr.append(th);
+            tr.append($('<td />').append(rowdata[key]))
         }
         $('#custamized-table-body').append(tr);   
     });
