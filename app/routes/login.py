@@ -1,9 +1,9 @@
 """login
 """
 from flask import render_template, redirect, request, abort, flash, url_for
-from flask_login import login_user
 import routes
-from main import AppUser
+from database.model.app_user import AppUser
+from flask_login import login_user
 
 @routes.bp.route('/login', methods=['GET', 'POST'])
 def login():

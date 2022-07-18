@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
+
+from sqlalchemy import true
+
 from flask import Flask
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager
 import logging
 
 from database import Database, app_setting
@@ -15,16 +18,11 @@ database = Database(app=app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-class AppUser(UserMixin, database.db.Model):
-    __tablename__ = 'app_user'
-
-    id = database.db.Column(database.db.Integer, primary_key=True)
-    name = database.db.Column(database.db.String(100), unique = False)
-    password = database.db.Column(database.db.String(100), unique = False)
-    mail = database.db.Column(database.db.String(100), unique = False)
-	
-    def __init__(self, name):
-        self.name = name
+if database.is_init is not True:
+    database.is_init = True
+    from database.model.app_user_relation import AppUserRelation
+    from database.model.app import App
+    from database.model.app_user import AppUser
 
 @login_manager.user_loader
 def load_user(user_id):
