@@ -32,6 +32,9 @@ def logger(message):
 	app.logger.setLevel(logging.INFO)
 	app.logger.info(message)
 
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+
 if __name__ == "__main__":
 	app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
     
