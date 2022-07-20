@@ -23,6 +23,9 @@ if database.is_init is not True:
     from database.model.app_user_relation import AppUserRelation
     from database.model.app import App
     from database.model.app_user import AppUser
+    from database.model.app_usecase_perspective_relation import AppUsecasePerspective
+    from database.model.usecase import Usecase
+    from database.model.perspective import Perspective
 
 @login_manager.user_loader
 def load_user(user_id):

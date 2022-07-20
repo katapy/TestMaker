@@ -1,4 +1,4 @@
-"""table route
+"""app route
 """
 
 import string
@@ -16,4 +16,4 @@ def app_list():
         logger(app_jsons)
         return app_jsons
     else:
-        return render_template('app_list.html')
+        return render_template('custamized_table.html', title = "App List")
