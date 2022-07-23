@@ -28,8 +28,6 @@ function onChangeNewInput(){
 */
 function onChangeInput(id){
     let element = document.getElementById('input_' + id);
-    // console.log(id);
-    // key = id.toString(10);
     data = { [id] : element.value};
     json = JSON.stringify(data);  // Convert to json.
     create_data_table(json);
@@ -62,7 +60,6 @@ function create_data_table(json) {
 let create_table = function(data) {
     $("#custamized-table-body").empty();
     $("#custamized-table-header").empty();
-    console.log("data: " + data);
     var usage_arr = JSON.parse(data);
     var header_arr = usage_arr['header'];
     var data_arr = usage_arr['data'];
@@ -79,7 +76,8 @@ let create_table = function(data) {
     $.each(data_arr,function(i,rowdata){
         var tr = $('<tr />');
         for(var key in header_arr) {
-            tr.append($('<td />').append(rowdata[key]))
+            var td = $('<td />').append(rowdata[key]);
+            tr.append(td);
         }
         $('#custamized-table-body').append(tr);   
     });
@@ -92,4 +90,11 @@ let create_table = function(data) {
     tr.append(id);
     tr.append(name);
     $('#custamized-table-body').append(tr);   
+}
+
+/**
+ * @param {string} path
+ */
+let Redirect = function(redirect_url) {
+    location = redirect_url
 }

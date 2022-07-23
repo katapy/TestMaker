@@ -8,11 +8,11 @@ import routes
 from database.event.usecase_event import get_usecase, convert_json
 from main import logger
 
-@routes.bp.route("/usecase", methods=['GET', 'POST'])
+@routes.bp.route("/usecase/<int:id>", methods=['GET', 'POST'])
 @login_required
-def usecases_list():
+def usecases_list(id: int):
     if request.method == 'POST':
-        app_jsons= convert_json(get_usecase(1))
+        app_jsons= convert_json(get_usecase(id))
         logger(app_jsons)
         return app_jsons
     else:

@@ -35,13 +35,23 @@ insert into table_header(
         'name',
         'App name');
 
+insert into table_header(
+    table_name,
+    column_name,
+    display_name)
+    values(
+        'app_list',
+        'perspective',
+        'Perspective Button'
+        );
+
 -- Perspective List
 insert into table_header(
     table_name,
     column_name,
     display_name)
     values(
-        'perspevtive_list',
+        'perspective_list',
         'id',
         'ID');
 
@@ -50,9 +60,18 @@ insert into table_header(
     column_name,
     display_name)
     values(
-        'perspevtive_list',
+        'perspective_list',
         'name',
         'Perspevtive name');
+
+insert into table_header(
+    table_name,
+    column_name,
+    display_name)
+    values(
+        'perspective_list',
+        'usecase',
+        'Usecase Button');
 
 -- Usecase List
 insert into table_header(
@@ -73,6 +92,13 @@ insert into table_header(
         'name',
         'Usecase name');
 
-
+insert into table_header(
+    table_name,
+    column_name,
+    display_name)
+    values(
+        'usecase_list',
+        'perspective',
+        'Perspective Button');
 
 SELECT * FROM table_header;
