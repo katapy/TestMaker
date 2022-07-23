@@ -47,24 +47,18 @@ eval $(minikube docker-env)
 
     # Allow permission
     chmod +x wait_db_connection.sh
-    chmod +x create_table.sh
-    chmod +x insert_master_table.sh
+    chmod +x run_sql.sh
 
     # Waiting for connecting DB.
     ./wait_db_connection.sh
 
     # Initialize RDB
     echo "Initailize RDB"
-    # Allow permission
-    ./create_table.sh
-    ./insert_master_table.sh
+    ./run_sql.sh create_table.sql
+    ./run_sql.sh insert_master_table.sql
 
     # Set env data if exist
-    if [ -e "env/insert_env_data.sh" ]; then
-        echo "File exists."
-        chmod +x env/insert_env_data.sh
-        ./env/insert_env_data.sh
-    fi
+    ./run_sql.sh env/insert_env_data.sql
 
     # Open brower
     URL=`minikube service $APP_NAME --url --namespace=$APP_NAME`
