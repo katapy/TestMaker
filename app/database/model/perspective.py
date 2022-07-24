@@ -17,7 +17,10 @@ class Perspective(database.db.Model):
     usecases = relation("Usecase", secondary="app_usecase_perspective_relation", back_populates="perspectives")
     
     def __init__(self, id, name, detail):
-        self.perspective_id = id
+        # Do not set id if id is 0.
+        if id > 0:
+            self.perspective_id = id
         self.perspective_name = name
         self.perspective_detail = detail
+        
 		

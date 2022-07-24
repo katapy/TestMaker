@@ -18,7 +18,10 @@ def perspective_list(app_id: int):
             name = request.form.get('name')
             detail = request.form.get('detail')
             p = Perspective(id=id, name=name, detail=detail)
-            update_perspective(p)
+            if id == 0:
+                add_perspective(app_id, p)
+            else:
+                update_perspective(p)
         else:
             perspectives_jsons= convert_json(get_perspectives(app_id))
             return perspectives_jsons

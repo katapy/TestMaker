@@ -63,9 +63,13 @@ let create_table = function(data) {
     $("#custamized-table-body").empty();
     $("#custamized-table-header").empty();
     var usage_arr = JSON.parse(data);
+    var before = usage_arr['before'];
     var header_arr = usage_arr['header'];
     var data_arr = usage_arr['data'];
     var modals = usage_arr['modals'];
+
+    // Set before table
+    $('#custam-table').before(before);
 
     // Set header.
     var header_tr = $('<tr />');
