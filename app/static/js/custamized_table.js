@@ -31,6 +31,8 @@ function onChangeInput(id){
     data = { [id] : element.value};
     json = JSON.stringify(data);  // Convert to json.
     create_data_table(json);
+
+    SetModalActive();
 }
 
 /**
@@ -63,6 +65,7 @@ let create_table = function(data) {
     var usage_arr = JSON.parse(data);
     var header_arr = usage_arr['header'];
     var data_arr = usage_arr['data'];
+    var modals = usage_arr['modals'];
 
     // Set header.
     var header_tr = $('<tr />');
@@ -89,7 +92,12 @@ let create_table = function(data) {
     name.append('<input id="newInput" type="text" name="intput" onchange="onChangeNewInput()">');
     tr.append(id);
     tr.append(name);
-    $('#custamized-table-body').append(tr);   
+    $('#custamized-table-body').append(tr);
+
+    // Set modals.
+    $.each(modals,function(i,modal){
+        $("#js-overlay").after(modal);
+    });
 }
 
 /**
@@ -97,4 +105,21 @@ let create_table = function(data) {
  */
 let Redirect = function(redirect_url) {
     location = redirect_url
+}
+
+/**
+ * Modal Window be active.
+ * @param {int} id Modal window id.
+ */
+let SetModalActive = function(id) {
+    // Open modal window.
+    modal_id = "#js-modal-" + id
+    modal_id += ", #js-overlay";
+    $(modal_id).addClass("open");
+
+    // Close modal window when on click.
+    close_id = "#js-close-" + id; 
+    $(close_id).on('click', function () { 
+        modal.removeClass("open");
+    });
 }

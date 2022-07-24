@@ -16,6 +16,8 @@ class Perspective(database.db.Model):
 
     usecases = relation("Usecase", secondary="app_usecase_perspective_relation", back_populates="perspectives")
     
-    def __init__(self, app_name):
-        self.app_name = app_name
+    def __init__(self, id, name, detail):
+        self.perspective_id = id
+        self.perspective_name = name
+        self.perspective_detail = detail
 		
