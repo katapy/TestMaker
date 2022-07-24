@@ -8,7 +8,6 @@ from sqlalchemy import text, select
 from database.model.app import App
 from database.model.app_user import AppUser
 from database.event.table_header_event import get_disply_name
-from main import database, logger
 
 def get_all_app():
     # result = App.query.join(AppUserRelation).join(AppUser).filter(AppUser.name == "admin").all()

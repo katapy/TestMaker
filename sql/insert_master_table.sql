@@ -102,3 +102,14 @@ insert into table_header(
         'Perspective Button');
 
 SELECT * FROM table_header;
+
+
+-- dummy usucase
+insert into usecase(
+    usecase_id, 
+    usecase_name,
+    usecase_detail)
+    values(
+        0,
+        'dummy',
+        '');

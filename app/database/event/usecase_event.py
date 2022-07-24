@@ -12,9 +12,11 @@ from database.event.table_header_event import get_disply_name
 from main import database, logger
 
 def get_usecase(app_id: int):
-    user: AppUser = current_user
-    app: App = [x for x in user.apps if x.app_id == app_id][0]
-    return app.usecases
+	user: AppUser = current_user
+	app: App = [x for x in user.apps if x.app_id == app_id][0]
+	# Exclude dummy usecase.
+	usecases: list[Usecase] = [x for x in app.usecases if x.usecase_id > 0]
+	return usecases
 
 def convert_json(usecases: list[Usecase]):
 	usecases_jsons = []

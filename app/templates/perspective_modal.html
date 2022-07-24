@@ -1,0 +1,37 @@
+
+<div class="modal" id="js-modal-$id">
+    <div class="modal-close__wrap">
+        <button class="modal-close" id="js-close-$id">
+        <span></span>
+        <span></span>
+        </button>
+    </div>
+    <h2>$item Editor</h2>
+    <form method="POST">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" name="id" value="$id" readonly hidden>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">$item Name: </label>
+                    <input type="text" name="name" value="$name">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">$item Detail: </label>
+                    <textarea name="detail" cols="30" rows="5">$detail
+                    </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Ok">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
