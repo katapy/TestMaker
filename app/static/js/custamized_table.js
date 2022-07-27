@@ -46,7 +46,6 @@ function create_data_table(json) {
         data: json,
         contentType: "application/json",
         success: function(data) {
-            console.log(data);
             create_table(data);
         },
         error: function(msg) {
@@ -109,21 +108,4 @@ let create_table = function(data) {
  */
 let Redirect = function(redirect_url) {
     location = redirect_url
-}
-
-/**
- * Modal Window be active.
- * @param {int} id Modal window id.
- */
-let SetModalActive = function(id) {
-    // Open modal window.
-    modal_id = "#js-modal-" + id
-    modal_id += ", #js-overlay";
-    $(modal_id).addClass("open");
-
-    // Close modal window when on click.
-    close_id = "#js-close-" + id; 
-    $(close_id).on('click', function () { 
-        modal.removeClass("open");
-    });
 }
