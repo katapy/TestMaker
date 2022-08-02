@@ -64,10 +64,10 @@ def convert_json(perspectives: list[Perspective]) -> str:
 				continue
 			usecase_list += f"<option value='../usecase/{usecase.usecase_id}' > {usecase.usecase_name} </option>"
 		usecase_list += "</select>"
-		perspective_jsons = dict(\
-			id=f"<p id={perspective.perspective_id}> {perspective.perspective_id} </p>", \
-			name=f"<button onClick=\"SetModalActive({perspective.perspective_id})\">{perspective.perspective_name}</button>",\
-			usecase=usecase_list)
+		perspective_jsons = dict(
+			id=perspective.perspective_id,
+			name=perspective.perspective_name
+		)
 		perspectives_jsons.append(perspective_jsons)
 
 		# modal window info.
