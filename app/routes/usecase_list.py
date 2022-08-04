@@ -16,4 +16,4 @@ def usecases_list(id: int):
         logger(app_jsons)
         return app_jsons
     else:
-        return render_template('custamized_table.html', title = "Usecase List")
+        return render_template('item_list.html', title = "Usecase List")

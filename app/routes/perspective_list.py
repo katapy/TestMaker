@@ -25,4 +25,4 @@ def perspective_list(app_id: int):
         else:
             perspectives_jsons= convert_json(get_perspectives(app_id))
             return perspectives_jsons
-    return render_template('custamized_table.html', title = "Perspective List")
+    return render_template('item_list.html', title = "Perspective List")

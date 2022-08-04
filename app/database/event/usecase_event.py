@@ -27,12 +27,15 @@ def convert_json(usecases: list[Usecase]):
 		for perspective in usecase.perspectives:
 			perspective_list += f"<option value='../usecase/{perspective.perspective_id}' > {perspective.perspective_name} </option>"
 		perspective_list += "</select>"
-		perspective_jsons = dict(\
-			id=f"<p id={usecase.usecase_id}> {usecase.usecase_id} </p>", \
-			name=f"<input id=\"input_{usecase.usecase_id}\" type=\"text\" name=\"intput\" value=\"{usecase.usecase_name}\" onchange=\"onChangeInput({usecase.usecase_id})\">",\
-			perspective=perspective_list)
+		perspective_jsons = dict(
+			id=usecase.usecase_id,
+			name=usecase.usecase_name
+		)
 		usecases_jsons.append(perspective_jsons)
-	return json.dumps(dict(header=get_headers(), data=usecases_jsons))
+	return json.dumps(dict(
+		header=get_headers(), 
+		data=usecases_jsons
+		))
 
 def get_headers():
 	return dict(id=get_disply_name('usecase_list', 'id'),\
