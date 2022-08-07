@@ -40,6 +40,18 @@ def get_perspectives(app_id: int):
     app: App = get_app(app_id=app_id)
     return app.perspectives
 
+def get_perspective(perspective_id: int) -> Perspective:
+	p: Perspective = Perspective.query.filter(text(f"perspective_id={perspective_id}")).first()
+	return p
+
+def get_perspective_json(perspective_id: int) -> string:
+	p: Perspective = Perspective.query.filter(text(f"perspective_id={perspective_id}")).first()
+	json_perspective = json.dumps(dict(\
+		id=p.perspective_id,\
+		item_name=p.perspective_name,\
+		detail=p.perspective_detail))
+	return json_perspective
+
 def convert_json(perspectives: list[Perspective]) -> str:
 	perspectives_jsons = []
 

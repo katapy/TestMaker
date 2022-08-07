@@ -79,7 +79,6 @@ let create_table = function(data) {
     $('#custamized-table-header').append(header_tr);
 
     // Set data.
-    console.log(data_arr);
     $.each(data_arr,function(i,rowdata){
         var tr = $('<tr />');
         var id = rowdata['id'];
@@ -87,15 +86,10 @@ let create_table = function(data) {
         var td_id = $('<td />');
         td_id.append('<p>' + id + '</p>');
         var td_name = $('<td />');
-       td_name.append(CreateButton(`SetModalActive(${id})`, name));
+        td_name.append(CreateButton(`SetModalActive(${id})`, name));
         tr.append(td_id);
         tr.append(td_name);
         $('#custamized-table-body').append(tr);   
-    });
-    
-    // Set modals.
-    $.each(modals,function(i,modal){
-        $("#js-overlay").after(modal);
     });
 }
 
