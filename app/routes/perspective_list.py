@@ -2,12 +2,25 @@
 """
 
 import string
-from flask import render_template, request
+
+from sqlalchemy import null
+from flask import render_template, request, make_response
 from flask_login import login_required
 import routes
 from database.model.perspective import Perspective
-from database.event.perspective_event import get_perspectives, add_perspective, update_perspective, convert_json
+from database.event.perspective_event import get_perspective_json, get_perspectives, add_perspective, update_perspective, convert_json
 from main import logger
+
+@routes.bp.route('/perspective/modal/<int:id>', methods=['GET', 'POST'])
+@login_required
+def modal_window(id: int):
+    if request.method == 'POST':
+        if id < 1:
+            return {'result': 'null'}
+        return get_perspective_json(id)
+    else:
+        return render_template('perspective_modal.html')
+
 
 @routes.bp.route('/perspective/<int:app_id>', methods=['GET', 'POST'])
 @login_required

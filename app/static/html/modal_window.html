@@ -1,0 +1,37 @@
+
+<div class="modal" id="js-modal-$id">
+    <div class="modal-close__wrap">
+        <button class="modal-close" id="js-close-$id" onclick="Redirect(location.pathname)">
+        <span></span>
+        <span></span>
+        </button>
+    </div>
+    <h2>$item Editor</h2>
+    <button id="js-edit-$id" onclick="StartEdit($id)"> Edit </button>
+    <form method="POST">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" name="id" value="$id" readonly hidden>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">$item Name: </label>
+                    <input type="text" class="edit-item-$id" name="name" value="$name" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">$item Detail: </label>
+                    <textarea name="detail" class="edit-item-$id" cols="30" rows="5" readonly>$detail</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Ok">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
