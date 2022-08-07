@@ -2,7 +2,9 @@
 """
 
 import string
-from flask import render_template, request
+
+from sqlalchemy import null
+from flask import render_template, request, make_response
 from flask_login import login_required
 import routes
 from database.model.perspective import Perspective
@@ -13,6 +15,8 @@ from main import logger
 @login_required
 def modal_window(id: int):
     if request.method == 'POST':
+        if id < 1:
+            return {'result': 'null'}
         return get_perspective_json(id)
     else:
         return render_template('perspective_modal.html')

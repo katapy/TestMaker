@@ -46,6 +46,8 @@ def get_perspective(perspective_id: int) -> Perspective:
 
 def get_perspective_json(perspective_id: int) -> string:
 	p: Perspective = Perspective.query.filter(text(f"perspective_id={perspective_id}")).first()
+	if p is None:
+		return None
 	json_perspective = json.dumps(dict(\
 		id=p.perspective_id,\
 		item_name=p.perspective_name,\
@@ -55,14 +57,6 @@ def get_perspective_json(perspective_id: int) -> string:
 def convert_json(perspectives: list[Perspective]) -> str:
 	perspectives_jsons = []
 
-	# modal window info.
-	modals = []
-	modals.append(render_template('perspective_modal.html')\
-			.replace('$item', "Perspective")
-			.replace('$id', "0")\
-			.replace('$name', "")\
-			.replace('$detail', ""))
-	
 	# Register Button(before table)
 	before = f"<button onClick=\"SetModalActive(0)\"> New </button>"
 
@@ -82,17 +76,10 @@ def convert_json(perspectives: list[Perspective]) -> str:
 		)
 		perspectives_jsons.append(perspective_jsons)
 
-		# modal window info.
-		modals.append(render_template('perspective_modal.html')\
-			.replace('$item', "Perspective")
-			.replace('$id', f"{perspective.perspective_id}")\
-			.replace('$name', perspective.perspective_name)\
-			.replace('$detail', perspective.perspective_detail))
 	return json.dumps(dict(\
 		before=before,\
 		header=get_headers(),\
-		data=perspectives_jsons, \
-		modals=modals))
+		data=perspectives_jsons))
 
 def get_headers():
 	return dict(id=get_disply_name('perspective_list', 'id'),\
