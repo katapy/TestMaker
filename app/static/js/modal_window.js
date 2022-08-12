@@ -4,39 +4,40 @@
  */
  let SetModalActive = function(id) {
     item_type = location.pathname.split('/')[2];
-    // Open modal window.
-    modal_id = "#js-modal-" + id
-    modal_id += ", #js-overlay";
-    $(modal_id).addClass("open");
     $.ajax({
         type: 'GET',
         url: `/testmaker/${item_type}/modal/${id}`,
         success: function(data) {
-            modal = undefined;
             if(id !== 0) {
-                AsyncGetItem(item_type, id).then((item) => {
-                    modal = data
-                        .replace(/\$id/g, item.id)
-                        .replace(/\$name/g, item.name)
-                        .replace(/\$detail/g, item.detail)
-                        .replace(/\$item/g, item_type);
-                        $("#js-overlay").after(modal);
-                        $(modal_id).addClass("open");
+                AsyncGetItem(item_type, id, item_type).then((item) => {
+                    CreateMoodal(data, item, item_type);
                 });
             }
             else {
-                modal = data
-                    .replace(/\$id/g, 0)
-                    .replace(/\$name/g, '')
-                    .replace(/\$detail/g, '')
-                    .replace(/\$item/g, item_type);
-                $("#js-overlay").after(modal);
-                $(modal_id).addClass("open");
-                // Start edit if create new.
+                item = new Item(0, '', '', item_type);
+                CreateMoodal(data, item, item_type);
                 StartEdit(id);
             }
         }
     })
+}
+
+/**
+ * Create modal component.
+ * @param {string} data origin data
+ * @param {Item} item Item
+ * @param {string} item_type Item type
+ */
+let CreateMoodal = function(data, item, item_type) {
+    modal_id = "#js-modal-" + item.id
+    modal_id += ", #js-overlay";
+    modal = data
+        .replace(/\$id/g, item.id)
+        .replace(/\$name/g, item.name)
+        .replace(/\$detail/g, item.detail)
+        .replace(/\$item/g, item_type);
+    $("#js-overlay").after(modal);
+    $(modal_id).addClass("open");
 }
 
 /**

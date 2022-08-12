@@ -61,18 +61,21 @@ def convert_json(perspectives: list[Perspective]) -> str:
 	before = f"<button onClick=\"SetModalActive(0)\"> New </button>"
 
 	for perspective in perspectives:
-		usecase_list = "<select name='usecase' \
-			onchange=\"Redirect(this.options[this.selectedIndex].value)\">"
-		usecase_list += f"<option value=sample> Select Usecase </option>"
+		usecase_list = ""
 		for usecase in perspective.usecases:
 			# Exclude dummy.
 			if usecase.usecase_id < 1:
 				continue
-			usecase_list += f"<option value='../usecase/{usecase.usecase_id}' > {usecase.usecase_name} </option>"
-		usecase_list += "</select>"
+			usecase_list += json.dumps(dict(
+				id = usecase.usecase_id,
+				name = usecase.usecase_name
+			))
 		perspective_jsons = dict(
 			id=perspective.perspective_id,
-			name=perspective.perspective_name
+			name=perspective.perspective_name,
+			relation=dict(
+				usecase=usecase_list
+			) 
 		)
 		perspectives_jsons.append(perspective_jsons)
 
