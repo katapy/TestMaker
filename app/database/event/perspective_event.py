@@ -12,7 +12,7 @@ from database.model.app import App
 from database.model.perspective import Perspective
 from database.model.usecase import Usecase
 from database.event.table_header_event import get_disply_name
-from main import database, logger
+from main import database
 
 def get_app(app_id: int) -> App:
 	user: AppUser = current_user
@@ -43,6 +43,12 @@ def get_perspectives(app_id: int):
 def get_perspective(perspective_id: int) -> Perspective:
 	p: Perspective = Perspective.query.filter(text(f"perspective_id={perspective_id}")).first()
 	return p
+
+
+def get_usecase_related_perspective(app_id: int, perspective_id: int):
+	perspectives: list[Perspective] = get_perspectives(app_id=app_id)
+	p: Perspective = [x for x in perspectives if x.perspective_id == perspective_id][0]
+	return p.usecases
 
 def get_perspective_json(perspective_id: int) -> string:
 	p: Perspective = Perspective.query.filter(text(f"perspective_id={perspective_id}")).first()

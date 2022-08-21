@@ -11,3 +11,11 @@ let CreateButton = function(function_name, text) {
     btn.text(text);
     return btn;
 }
+
+let CreateIFrame = function(name, src) {
+    var frame = document.createElement("iframe");
+    frame.name = name;
+    frame.src = src;
+    
+    return frame;
+}

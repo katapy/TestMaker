@@ -9,7 +9,6 @@ from database.model.app_user import AppUser
 from database.model.app import App
 from database.model.usecase import Usecase
 from database.event.table_header_event import get_disply_name
-from main import database, logger
 
 def get_usecase(app_id: int):
 	user: AppUser = current_user
