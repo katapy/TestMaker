@@ -6,7 +6,7 @@ import string
 from sqlalchemy import text
 from database.model.person import person
 from database.event.table_header_event import get_disply_name
-from main import database, logger
+from main import database
 
 def update_person(id: int, name: string):
 	p: person = person.query.filter(text(f"id={id}")).first()

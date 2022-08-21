@@ -42,7 +42,7 @@ function onChangeInput(id){
 function create_data_table(json) {
     $.ajax({
         type: "POST",
-        url: location.pathname,
+        url: location.pathname + location.search,
         data: json,
         contentType: "application/json",
         success: function(data) {
