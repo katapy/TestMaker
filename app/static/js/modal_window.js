@@ -19,7 +19,7 @@
                 StartEdit(id);
             }
         }
-    })
+    });
 }
 
 /**
@@ -38,7 +38,7 @@ let CreateMoodal = function(data, item, item_type) {
         .replace(/\$item/g, item_type);
     $("#js-overlay").after(modal);
     $(modal_id).addClass("open");
-    path = `/${location.pathname.split('/')[1]}/usecase/1?perspective=${item.id}`;
+    path = `${location.pathname.replace(item_type, 'usecase')}?${item_type}=${item.id}`;
     frame = CreateIFrame('usecase', path);
     $('#subitem').append(frame);
 }
